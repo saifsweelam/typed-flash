@@ -1,0 +1,24 @@
+{
+  "name": "typed-flash",
+  "version": "0.0.0",
+  "description": "A modern implementation for flashing in express/connect middlewares",
+  "main": "dist/index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saifsweelam/typed-flash.git"
+  },
+  "keywords": [
+    "express",
+    "flash",
+    "ssr",
+    "redirect"
+  ],
+  "author": "Seif El-Din Sweilam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saifsweelam/typed-flash/issues"
+  },
+  "homepage": "https://github.com/saifsweelam/typed-flash#readme"
+}
