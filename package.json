@@ -1,24 +1,32 @@
 {
-  "name": "typed-flash",
-  "version": "0.0.0",
-  "description": "A modern implementation for flashing in express/connect middlewares",
-  "main": "dist/index.js",
-  "scripts": {
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/saifsweelam/typed-flash.git"
-  },
-  "keywords": [
-    "express",
-    "flash",
-    "ssr",
-    "redirect"
-  ],
-  "author": "Seif El-Din Sweilam",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/saifsweelam/typed-flash/issues"
-  },
-  "homepage": "https://github.com/saifsweelam/typed-flash#readme"
+    "name": "typed-flash",
+    "version": "0.0.0",
+    "description": "A modern implementation for flashing in express/connect middlewares",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsup",
+        "format": "prettier --write ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/saifsweelam/typed-flash.git"
+    },
+    "keywords": [
+        "express",
+        "flash",
+        "ssr",
+        "redirect"
+    ],
+    "author": "Seif El-Din Sweilam",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/saifsweelam/typed-flash/issues"
+    },
+    "homepage": "https://github.com/saifsweelam/typed-flash#readme",
+    "devDependencies": {
+        "@arethetypeswrong/cli": "^0.18.1",
+        "prettier": "^3.5.3",
+        "tsup": "^8.5.0",
+        "typescript": "^5.8.3"
+    }
 }
