@@ -1,4 +1,4 @@
-import type { FlashFunction } from "./FlashFunction";
+import type { FlashFunction } from './FlashFunction';
 
 declare global {
     namespace Express {

@@ -1,4 +1,4 @@
-import type { FlashData } from "../../global";
+import type { FlashData } from '../../global';
 
 export type Options = {
     unsafe?: boolean;

@@ -3,7 +3,9 @@ import type { AsyncFlashFunction } from './types/AsyncFlashFunction';
 import type { AsyncOptions } from './types/AsyncOptions';
 import type { Context } from './types/Context';
 
-const asyncFlashFunction = (initialOptions: AsyncOptions): AsyncFlashFunction => {
+const asyncFlashFunction = (
+    initialOptions: AsyncOptions,
+): AsyncFlashFunction => {
     return async function <Key extends FlashKey>(
         this: Context,
         key?: Key,
