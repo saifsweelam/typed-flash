@@ -27,7 +27,7 @@ const asyncFlashFunction = (
                 data[key].push(value);
             }
 
-            await options.saveData(data);
+            return await options.saveData(data);
         }
 
         if (key && !value) {

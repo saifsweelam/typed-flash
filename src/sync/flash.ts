@@ -50,7 +50,7 @@ const flashFunction = (initialOptions: Options): FlashFunction => {
                 data[key].push(value);
             }
 
-            options.saveData(data);
+            return options.saveData(data);
         }
 
         if (key && !value) {
