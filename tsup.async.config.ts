@@ -1,0 +1,10 @@
+import { defineConfig } from 'tsup';
+
+export default defineConfig({
+    entryPoints: ['src/async/index.ts'],
+    format: ['cjs', 'esm'],
+    external: ['express'],
+    dts: true,
+    outDir: 'dist/async',
+    clean: true,
+});

@@ -1,4 +1,4 @@
-import type { FlashData } from './FlashData';
+import type { FlashData } from '../../global';
 import type { FlashFunction } from './FlashFunction';
 
 export type Context = {

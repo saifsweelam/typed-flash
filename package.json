@@ -8,13 +8,21 @@
             "import": "./dist/index.js",
             "require": "./dist/index.cjs"
         },
+        "./async": {
+            "import": "./dist/async/index.js",
+            "require": "./dist/async/index.cjs"
+        },
         "./package.json": "./package.json"
     },
     "scripts": {
-        "build": "tsup",
+        "build": "npm run build:sync && npm run build:async",
+        "build:sync": "tsup --config tsup.sync.config.ts",
+        "build:async": "tsup --config tsup.async.config.ts",
         "format": "prettier --write .",
         "check-exports": "attw --pack .",
-        "check-types": "tsc"
+        "check-types": "npm run check-types:sync && npm run check-types:async",
+        "check-types:sync": "tsc -p tsconfig.sync.json",
+        "check-types:async": "tsc -p tsconfig.async.json"
     },
     "repository": {
         "type": "git",

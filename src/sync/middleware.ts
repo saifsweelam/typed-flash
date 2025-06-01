@@ -1,21 +1,8 @@
 import type { RequestHandler } from 'express';
 import flashFunction from './flash';
-import type { FlashFunction } from './types/FlashFunction';
+import type { Options } from './types/Options';
 
-type MiddlewareOptions = {
-    unsafe?: boolean;
-    sessionKey?: string;
-};
-
-declare global {
-    namespace Express {
-        interface Request {
-            flash: FlashFunction;
-        }
-    }
-}
-
-const middleware = (options?: MiddlewareOptions): RequestHandler => {
+const middleware = (options?: Options): RequestHandler => {
     options = options || {};
     const safe = options.unsafe === undefined ? true : !options.unsafe;
 

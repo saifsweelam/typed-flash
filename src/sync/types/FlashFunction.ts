@@ -1,5 +1,5 @@
+import type { FlashData, FlashKey } from '../../global';
 import type { Context } from './Context';
-import type { FlashData, FlashKey } from './FlashData';
 import type { Options } from './Options';
 
 export interface FlashFunction {

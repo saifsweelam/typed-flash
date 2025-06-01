@@ -1,5 +1,5 @@
+import type { FlashKey } from '../global';
 import type { Context } from './types/Context';
-import type { FlashKey } from './types/FlashData';
 import type { FlashFunction } from './types/FlashFunction';
 import type { Options } from './types/Options';
 
