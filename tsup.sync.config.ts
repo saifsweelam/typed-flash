@@ -6,5 +6,6 @@ export default defineConfig({
     external: ['express'],
     dts: true,
     outDir: 'dist',
+    tsconfig: 'tsconfig.sync.json',
     clean: true,
 });

@@ -22,7 +22,8 @@
         "check-exports": "attw --pack .",
         "check-types": "npm run check-types:sync && npm run check-types:async",
         "check-types:sync": "tsc -p tsconfig.sync.json",
-        "check-types:async": "tsc -p tsconfig.async.json"
+        "check-types:async": "tsc -p tsconfig.async.json",
+        "ci": "npm run build && npm run check-exports && npm run check-types && npm run format"
     },
     "repository": {
         "type": "git",
@@ -50,5 +51,8 @@
         "prettier": "^3.5.3",
         "tsup": "^8.5.0",
         "typescript": "^5.8.3"
+    },
+    "peerDependencies": {
+        "@types/express": "*"
     }
 }
