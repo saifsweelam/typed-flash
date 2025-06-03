@@ -1,4 +1,4 @@
-import type { FlashKey } from '../global';
+import type { FlashKey, FlashMap } from '../global';
 import type { AsyncFlashFunction } from './types/AsyncFlashFunction';
 import type { AsyncOptions } from './types/AsyncOptions';
 import type { Context } from './types/Context';
@@ -9,7 +9,7 @@ const asyncFlashFunction = (
     return async function <Key extends FlashKey>(
         this: Context,
         key?: Key,
-        value?: TypedFlash.FlashMap[Key],
+        value?: FlashMap[Key],
         overrideOptions?: AsyncOptions,
     ) {
         const options = { ...initialOptions, ...overrideOptions };

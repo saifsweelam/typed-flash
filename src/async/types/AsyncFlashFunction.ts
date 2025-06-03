@@ -1,12 +1,12 @@
 import type { Context } from './Context';
 import type { AsyncOptions } from './AsyncOptions';
-import type { FlashData, FlashKey } from '../../global';
+import type { FlashData, FlashKey, FlashMap } from '../../global';
 
 export interface AsyncFlashFunction {
     <Key extends FlashKey>(
         this: Context,
         key: Key,
-        value: TypedFlash.FlashMap[Key] | TypedFlash.FlashMap[Key][],
+        value: FlashMap[Key] | FlashMap[Key][],
         options?: AsyncOptions,
     ): Promise<void>;
 

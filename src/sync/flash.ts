@@ -1,4 +1,4 @@
-import type { FlashKey } from '../global';
+import type { FlashKey, FlashMap } from '../global';
 import type { Context } from './types/Context';
 import type { FlashFunction } from './types/FlashFunction';
 import type { Options } from './types/Options';
@@ -7,7 +7,7 @@ const flashFunction = (initialOptions: Options): FlashFunction => {
     return function <Key extends FlashKey>(
         this: Context,
         key?: Key,
-        value?: TypedFlash.FlashMap[Key],
+        value?: FlashMap[Key],
         overrideOptions?: Options,
     ) {
         const options = { ...initialOptions, ...overrideOptions };

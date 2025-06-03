@@ -4,12 +4,10 @@ import flash from 'typed-flash';
 
 const app = express();
 
-declare global {
-    namespace TypedFlash {
-        interface FlashMap {
-            messages: { title: string; body: string };
-            errors: { code: number; message: string };
-        }
+declare module 'typed-flash' {
+    interface FlashMap {
+        messages: { title: string; body: string };
+        errors: { code: number; message: string };
     }
 }
 
