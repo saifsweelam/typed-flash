@@ -19,7 +19,7 @@
         "build:sync": "tsup --config tsup.sync.config.ts",
         "build:async": "tsup --config tsup.async.config.ts",
         "format": "prettier --write .",
-        "check-exports": "attw --pack .",
+        "check-exports": "attw --pack . --profile node16",
         "check-types": "npm run check-types:sync && npm run check-types:async",
         "check-types:sync": "tsc -p tsconfig.sync.json",
         "check-types:async": "tsc -p tsconfig.async.json",
@@ -54,5 +54,8 @@
     },
     "peerDependencies": {
         "@types/express": "*"
+    },
+    "engines": {
+        "node": ">=12.0.0"
     }
 }

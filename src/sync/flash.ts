@@ -3,7 +3,7 @@ import type { Context } from './types/Context';
 import type { FlashFunction } from './types/FlashFunction';
 import type { Options } from './types/Options';
 
-const flashFunction = (initialOptions: Options): FlashFunction => {
+const flashFunction = (initialOptions: Options = {}): FlashFunction => {
     return function <Key extends FlashKey>(
         this: Context,
         key?: Key,

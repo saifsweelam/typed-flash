@@ -3,7 +3,6 @@ import asyncFlashFunction from './flash';
 import type { AsyncOptions } from './types/AsyncOptions';
 
 const middleware = (options: AsyncOptions): RequestHandler => {
-    options = options || {};
     const safe = options.unsafe === undefined ? true : !options.unsafe;
 
     return function (req, res, next) {
