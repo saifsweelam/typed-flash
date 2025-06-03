@@ -1,8 +1,6 @@
 import express from 'express';
-import session from 'cookie-session';
-import flash from 'typed-flash';
-
-const app = express();
+import session from 'express-session';
+import flash, { FlashData } from 'typed-flash';
 
 declare module 'typed-flash' {
     interface FlashMap {
@@ -11,12 +9,32 @@ declare module 'typed-flash' {
     }
 }
 
+const app = express();
+
 app.use(
     session({
         secret: 'ThisIsASecretKey',
+        resave: false,
+        saveUninitialized: true,
     }),
 );
-app.use(flash());
+app.use(
+    flash({
+        saveData(data, { context }) {
+            // Context refers to the request object
+            context.session.flash = data;
+            console.log(`Saved Flash: ${JSON.stringify(data, null, 2)}`);
+        },
+        getData({ context }) {
+            // Context refers to the request object
+            console.log('Getting Flash Data...');
+            return (
+                (context.session.flash as FlashData) ??
+                (context.session.flash = {})
+            );
+        },
+    }),
+);
 
 app.get('/', (req, res) => {
     req.flash('messages', {

@@ -2,7 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import flash from 'typed-flash';
 
-declare module "typed-flash" {
+declare module 'typed-flash' {
     export interface FlashMap {
         messages: { title: string; body: string };
         errors: { code: number; message: string };
