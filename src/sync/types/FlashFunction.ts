@@ -1,30 +1,25 @@
 import type { FlashData, FlashKey, FlashMap } from '../../global';
-import type { Context } from './Context';
+import type { Context } from '../../global';
 import type { Options } from './Options';
 
-export interface FlashFunction {
+export interface FlashFunction<C extends Context = Context> {
     <Key extends FlashKey>(
-        this: Context,
+        this: C,
         key: Key,
         value: FlashMap[Key] | FlashMap[Key][],
-        options?: Options,
+        options?: Options<C>,
     ): void;
 
-    <Key extends FlashKey>(this: Context, key: Key): FlashData[Key];
+    <Key extends FlashKey>(this: C, key: Key): FlashData[Key];
 
     <Key extends FlashKey>(
-        this: Context,
+        this: C,
         key: Key,
         value: undefined,
         options: Options,
     ): FlashData[Key];
 
-    (this: Context): FlashData;
+    (this: C): FlashData;
 
-    (
-        this: Context,
-        key: undefined,
-        value: undefined,
-        options?: Options,
-    ): FlashData;
+    (this: C, key: undefined, value: undefined, options?: Options): FlashData;
 }

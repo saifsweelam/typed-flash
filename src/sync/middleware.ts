@@ -1,8 +1,9 @@
 import type { RequestHandler } from 'express';
 import flashFunction from './flash';
 import type { Options } from './types/Options';
+import type { RequestContext } from '../global';
 
-const middleware = (options?: Options): RequestHandler => {
+const middleware = (options?: Options<RequestContext>): RequestHandler => {
     options = options || {};
     const safe = options.unsafe === undefined ? true : !options.unsafe;
 
@@ -10,7 +11,7 @@ const middleware = (options?: Options): RequestHandler => {
         if (req.flash !== undefined && safe) {
             return next();
         }
-        req.flash = flashFunction(options);
+        req.flash = flashFunction<RequestContext>(options);
         next();
     };
 };

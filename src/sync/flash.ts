@@ -1,14 +1,16 @@
 import type { FlashKey, FlashMap } from '../global';
-import type { Context } from './types/Context';
+import type { Context } from '../global';
 import type { FlashFunction } from './types/FlashFunction';
 import type { Options } from './types/Options';
 
-const flashFunction = (initialOptions: Options = {}): FlashFunction => {
+const flashFunction = <C extends Context = Context>(
+    initialOptions: Options<C> = {},
+): FlashFunction<C> => {
     return function <Key extends FlashKey>(
-        this: Context,
+        this: C,
         key?: Key,
         value?: FlashMap[Key],
-        overrideOptions?: Options,
+        overrideOptions?: Options<C>,
     ) {
         const options = { ...initialOptions, ...overrideOptions };
 
@@ -37,7 +39,7 @@ const flashFunction = (initialOptions: Options = {}): FlashFunction => {
                 this.session.flash = data;
             });
 
-        const data = options.getData();
+        const data = options.getData({ context: this });
 
         if (key && value) {
             if (!data[key]) {
@@ -50,20 +52,20 @@ const flashFunction = (initialOptions: Options = {}): FlashFunction => {
                 data[key].push(value);
             }
 
-            return options.saveData(data);
+            return options.saveData(data, { context: this });
         }
 
         if (key && !value) {
             if (data[key]) {
                 const messages = data[key];
                 delete data[key];
-                options.saveData(data);
+                options.saveData(data, { context: this });
                 return messages;
             }
             return [];
         }
 
-        options.saveData({});
+        options.saveData({}, { context: this });
         return data;
     };
 };
