@@ -6,6 +6,7 @@ declare module 'typed-flash' {
     interface FlashMap {
         messages: { title: string; body: string };
         errors: { code: number; message: string };
+        warns: string;
     }
 }
 
@@ -42,12 +43,20 @@ app.get('/', (req, res) => {
         body: 'Hello, this is a flash message!',
     });
     req.flash('errors', { code: 404, message: 'Page not found' });
+    // Inline callback modification
+    req.flash('warns', 'This is a warning', {
+        saveData(data) {
+            (req.session as any).flash = data; // Or add SessionData override
+            console.log('Saving a warning');
+        }
+    })
     res.send('Flash messages set! <a href="/show">Show Flash Messages</a>');
 });
 
 app.get('/show', (req, res) => {
     const messages = req.flash('messages');
     const errors = req.flash('errors');
+    const warns = req.flash('warns');
     res.send(`
         <h1>Flash Messages</h1>
         <h2>Messages:</h2>
@@ -57,6 +66,10 @@ app.get('/show', (req, res) => {
         <h2>Errors:</h2>
         <ul>
             ${errors?.map((err) => `<li>Error ${err.code}: ${err.message}</li>`).join('')}
+        </ul>
+        <h2>Warnings:</h2>
+        <ul>
+            ${warns?.map((warn) => `<li>${warn}</li>`).join('')}
         </ul>
     `);
 });
