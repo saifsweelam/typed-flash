@@ -14,4 +14,4 @@ export type Context = {
     session?: any;
 };
 
-export type RequestContext = Request & Context & { session: any };
+export type RequestContext = Request & Context;
