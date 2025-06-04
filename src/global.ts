@@ -11,6 +11,7 @@ export type FlashData = {
 };
 
 export type Context = {
+    id?: any;
     session?: any;
 };
 

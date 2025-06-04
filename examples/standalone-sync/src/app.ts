@@ -1,7 +1,9 @@
 import { StandaloneFlash } from "typed-flash";
 import readline from "readline";
 
-const flashHandler = new StandaloneFlash();
+const flashHandler = new StandaloneFlash({
+    id: "default",
+});
 
 declare module 'typed-flash' {
     interface FlashMap {
