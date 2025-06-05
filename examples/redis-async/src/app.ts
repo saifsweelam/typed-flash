@@ -16,19 +16,21 @@ const redisClient = createClient({
 });
 redisClient.connect().then(() => console.log('Connected to Redis'));
 
-app.use(flash({
-    async saveData(data, { context }) {
-        const userId = context.body.userId || 'defaultUser';
-        console.log(`Saving Flash...`);
-        await redisClient.set(`flash:${userId}`, JSON.stringify(data));
-    },
+app.use(
+    flash({
+        async saveData(data, { context }) {
+            const userId = context.body.userId || 'defaultUser';
+            console.log(`Saving Flash...`);
+            await redisClient.set(`flash:${userId}`, JSON.stringify(data));
+        },
 
-    async getData({ context }) {
-        const userId = context.body.userId || 'defaultUser';
-        const flashData = await redisClient.get(`flash:${userId}`);
-        return flashData ? JSON.parse(flashData) : {};
-    },
-}));
+        async getData({ context }) {
+            const userId = context.body.userId || 'defaultUser';
+            const flashData = await redisClient.get(`flash:${userId}`);
+            return flashData ? JSON.parse(flashData) : {};
+        },
+    }),
+);
 
 app.get('/', async (req, res) => {
     await req.flash('messages', {

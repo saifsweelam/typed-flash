@@ -1,4 +1,5 @@
 # Typed Flash
+
 [![npm](https://img.shields.io/npm/v/typed-flash)](https://www.npmjs.com/package/typed-flash)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -13,16 +14,17 @@ One more focus of the package is not being fully dependent on `express-session`,
 You can also use our standalone flash message handler without Express.js, making it versatile for various applications.
 
 ## Contents
+
 - [Why Typed Flash?](#why-typed-flash)
 - [Installation](#installation)
 - [Quickstart](#quickstart)
 - [Compatibility](#compatibility)
 - [Usage](#usage)
-    * [Basic Usage](#basic-usage)
-    * [Custom Storage Logic (`getData`/`saveData`)](#custom-storage-logic-getdatasavedata)
-    * [Using the Async Middleware](#using-the-async-middleware)
-    * [Standalone Usage](#standalone-usage)
-    * [Standalone Usage (Async)](#standalone-usage-async)
+    - [Basic Usage](#basic-usage)
+    - [Custom Storage Logic (`getData`/`saveData`)](#custom-storage-logic-getdatasavedata)
+    - [Using the Async Middleware](#using-the-async-middleware)
+    - [Standalone Usage](#standalone-usage)
+    - [Standalone Usage (Async)](#standalone-usage-async)
 - [Flash Method API](#flash-method-api)
 - [Migration from `connect-flash`](#migration-from-connect-flash)
 
@@ -84,18 +86,20 @@ declare module 'typed-flash' {
         info: string;
         error: { message: string; code: number };
     }
-};
+}
 ```
 
 Then, set up your Express application with session and flash middleware:
 
 ```typescript
 const app = express();
-app.use(session({
-    secret: "This is a secret",
-    resave: false,
-    saveUninitialized: false,
-}));
+app.use(
+    session({
+        secret: 'This is a secret',
+        resave: false,
+        saveUninitialized: false,
+    }),
+);
 app.use(flash());
 ```
 
@@ -105,7 +109,7 @@ Then boom! you have your flash method there with type safety:
 app.get('/', (req, res) => {
     req.flash('error', { message: 'This is an error message', code: 500 }); // Valid
     req.flash('error', 'This is an error message'); // TypeScript Error
-    req.flash('Error', { message: 'This is an error message', code: 500 }) // TypeScript Error
+    req.flash('Error', { message: 'This is an error message', code: 500 }); // TypeScript Error
 });
 ```
 
@@ -136,7 +140,7 @@ const customFlash = flash({
     saveData: async (data, { context }) => {
         // Custom logic to save flash messages
         context.session.flash = data;
-    }
+    },
 });
 
 app.use(customFlash());
@@ -157,7 +161,7 @@ app.get('/', (req, res) => {
         saveData: async (data, { context }) => {
             // Custom logic to save flash messages
             context.session.flash = data;
-        }
+        },
     });
     res.send('Flash message set');
 });
@@ -177,19 +181,21 @@ declare module 'typed-flash/async' {
         info: string;
         error: { message: string; code: number };
     }
-};
+}
 
 const someDBClient;
 
 const app = express();
-app.use(flash({
-    getData: async ({ context }) => {
-        return await someDBClient.getFlashMessages(context.body.id) || {};
-    },
-    saveData: async (data, { context }) => {
-        await someDBClient.saveFlashMessages(context.body.id, data);
-    }
-}));
+app.use(
+    flash({
+        getData: async ({ context }) => {
+            return (await someDBClient.getFlashMessages(context.body.id)) || {};
+        },
+        saveData: async (data, { context }) => {
+            await someDBClient.saveFlashMessages(context.body.id, data);
+        },
+    }),
+);
 ```
 
 Then all your `req.flash()` calls will be async:
@@ -220,7 +226,7 @@ declare module 'typed-flash' {
         info: string;
         error: { message: string; code: number };
     }
-};
+}
 
 const flashHandler = new StandaloneFlash();
 
@@ -246,7 +252,7 @@ declare module 'typed-flash/async' {
         info: string;
         error: { message: string; code: number };
     }
-};
+}
 
 const asyncFlashHandler = new StandaloneAsyncFlash({
     getData: async () => {
@@ -255,7 +261,7 @@ const asyncFlashHandler = new StandaloneAsyncFlash({
     },
     saveData: async (data) => {
         // Custom logic to save flash messages
-    }
+    },
 });
 
 // Setting flash messages
@@ -266,16 +272,16 @@ const infoMessages = await asyncFlashHandler.flash('info'); // Type: string[]
 const allMessages = await asyncFlashHandler.flash(); // Type: FlashData
 ```
 
-
 ## Flash Method API
 
 The `options` parameter can be passed to any of the function overloads as a third parameter, assigning other unused to undefined.
 
-* **`flash()`**
-    
+- **`flash()`**
+
     Retrieves all flash messages stored, and clears the flash storage. (Note that keys with no values don't appear)
 
     Returns an object of type `FlashData`, which looks like this:
+
     ```typescript
     {
         key: [
@@ -288,9 +294,10 @@ The `options` parameter can be passed to any of the function overloads as a thir
         ],
     }
     ```
+
     The returned types will match your defined types in `FlashMap` interface.
 
-* **`flash(key)`**
+- **`flash(key)`**
 
     Retrieves flash messages of a specific key and deletes it from the flash storage.
 
@@ -298,7 +305,7 @@ The `options` parameter can be passed to any of the function overloads as a thir
 
     Returns an array of the value type defined in the `FlashMap` interface.
 
-* **`flash(key, value)`**
+- **`flash(key, value)`**
 
     Stores a given value associated to the given key.
 
@@ -307,19 +314,21 @@ The `options` parameter can be passed to any of the function overloads as a thir
 ## Migration from `connect-flash`
 
 Step 1: Update your import statement
+
 ```diff
 - import flash from 'connect-flash';
 + import flash from 'typed-flash';
 ```
 
 Step 2: Add your custom flash message types (only if you are using TypeScript)
+
 ```typescript
 declare module 'typed-flash' {
     interface FlashMap {
         info: string;
         error: { message: string; code: number };
     }
-};
+}
 ```
 
 Step 3: You're ready to go! The rest of your code should work as expected, but now with type safety.
@@ -332,7 +341,9 @@ Step 3: You're ready to go! The rest of your code should work as expected, but n
 ```
 
 ## License
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contributing
+
 Contributions are welcome through pull requests and will be reviewed by the repository owner to make sure they meet the project goals. Thank you in advance for your precious time!

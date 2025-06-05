@@ -1,6 +1,6 @@
-import { createClient } from "redis";
-import { StandaloneAsyncFlash } from "typed-flash/async";
-import readline from "readline";
+import { createClient } from 'redis';
+import { StandaloneAsyncFlash } from 'typed-flash/async';
+import readline from 'readline';
 
 declare module 'typed-flash/async' {
     interface FlashMap {
@@ -23,7 +23,7 @@ const flashHandler = new StandaloneAsyncFlash({
         return flashData ? JSON.parse(flashData) : {};
     },
 
-    id: 'default'
+    id: 'default',
 });
 
 const rl = readline.createInterface({
@@ -32,14 +32,17 @@ const rl = readline.createInterface({
 });
 
 function prompt() {
-    rl.question("Enter a flash message (or 'exit' to quit): ", async (input) => {
-        if (input.trim().toLowerCase() === "exit") {
-            const messages = await flashHandler.flash("info");
-            console.log(`Flash messages: ${messages}`);
-            rl.close();
-            return;
-        }
-        await flashHandler.flash("info", input);
-        prompt();
-    });
+    rl.question(
+        "Enter a flash message (or 'exit' to quit): ",
+        async (input) => {
+            if (input.trim().toLowerCase() === 'exit') {
+                const messages = await flashHandler.flash('info');
+                console.log(`Flash messages: ${messages}`);
+                rl.close();
+                return;
+            }
+            await flashHandler.flash('info', input);
+            prompt();
+        },
+    );
 }

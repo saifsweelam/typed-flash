@@ -1,8 +1,8 @@
-import { StandaloneFlash } from "typed-flash";
-import readline from "readline";
+import { StandaloneFlash } from 'typed-flash';
+import readline from 'readline';
 
 const flashHandler = new StandaloneFlash({
-    id: "default",
+    id: 'default',
 });
 
 declare module 'typed-flash' {
@@ -18,13 +18,13 @@ const rl = readline.createInterface({
 
 function prompt() {
     rl.question("Enter a flash message (or 'exit' to quit): ", (input) => {
-        if (input.trim().toLowerCase() === "exit") {
-            const messages = flashHandler.flash("info");
+        if (input.trim().toLowerCase() === 'exit') {
+            const messages = flashHandler.flash('info');
             console.log(`Flash messages: ${messages}`);
             rl.close();
             return;
         }
-        flashHandler.flash("info", input);
+        flashHandler.flash('info', input);
         prompt();
     });
 }

@@ -1,26 +1,26 @@
 {
-  "name": "basic-esm",
-  "version": "1.0.0",
-  "main": "src/app.ts",
-  "scripts": {
-    "start": "tsx src/app.ts",
-    "dev": "tsx watch src/app.ts"
-  },
-  "type": "module",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@types/express": "^5.0.2",
-    "@types/express-session": "^1.18.1",
-    "@types/node": "^22.15.29",
-    "typescript": "^5.8.3"
-  },
-  "dependencies": {
-    "express": "^5.1.0",
-    "express-session": "^1.18.1",
-    "tsx": "^4.19.4",
-    "typed-flash": "file:../../"
-  }
+    "name": "basic-esm",
+    "version": "1.0.0",
+    "main": "src/app.ts",
+    "scripts": {
+        "start": "tsx src/app.ts",
+        "dev": "tsx watch src/app.ts"
+    },
+    "type": "module",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "devDependencies": {
+        "@types/express": "^5.0.2",
+        "@types/express-session": "^1.18.1",
+        "@types/node": "^22.15.29",
+        "typescript": "^5.8.3"
+    },
+    "dependencies": {
+        "express": "^5.1.0",
+        "express-session": "^1.18.1",
+        "tsx": "^4.19.4",
+        "typed-flash": "file:../../"
+    }
 }

@@ -48,8 +48,8 @@ app.get('/', (req, res) => {
         saveData(data) {
             (req.session as any).flash = data; // Or add SessionData override
             console.log('Saving a warning');
-        }
-    })
+        },
+    });
     res.send('Flash messages set! <a href="/show">Show Flash Messages</a>');
 });
 
