@@ -1,8 +1,10 @@
 {
     "name": "typed-flash",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A modern implementation for flashing in express/connect middlewares",
-    "files": ["dist"],
+    "files": [
+        "dist"
+    ],
     "main": "dist/index.js",
     "exports": {
         ".": {
