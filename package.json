@@ -24,7 +24,9 @@
         "check-types:sync": "tsc -p tsconfig.sync.json",
         "check-types:async": "tsc -p tsconfig.async.json",
         "test": "vitest run",
-        "ci": "npm run format && npm run test && npm run check-types && npm run build && npm run check-exports"
+        "ci": "npm run format && npm run test && npm run check-types && npm run build && npm run check-exports",
+        "local-release": "changeset version && changeset publish",
+        "prepublishOnly": "npm run ci"
     },
     "repository": {
         "type": "git",
@@ -45,6 +47,7 @@
     "homepage": "https://github.com/saifsweelam/typed-flash#readme",
     "devDependencies": {
         "@arethetypeswrong/cli": "^0.18.1",
+        "@changesets/cli": "^2.29.4",
         "@types/express": "^5.0.2",
         "@types/node": "^22.15.29",
         "prettier": "^3.5.3",
